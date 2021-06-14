@@ -9,7 +9,7 @@ onload = function (){
     c = canvas.getContext('2d');
     canvas.width = innerWidth;
     canvas.height = innerHeight;
-    var countEx = 1000;
+    var countEx = 700; //alterei aqui era 1000
     var exX = [innerWidth/2];
     var exY = [innerHeight/2];
     var exAddX = [];
@@ -21,9 +21,9 @@ onload = function (){
     var exA = [];
     var exGravity = [];
     for(a = 0; a < countEx; a++){
-      exX[a] = innerWidth/2;
-      exY[a] = innerHeight/2;
-      exR[a] = (getRandom()+3)/3*2;
+      exX[a] = innerWidth/3; //estava 2
+      exY[a] = innerHeight/3; //estava 2
+      exR[a] = (getRandom()+6)/6*2; // estava 3
       exA[a] = 1;
       exColor1[a] = `${getColor()}`;
       exAngle = getRandom();
@@ -43,9 +43,9 @@ onload = function (){
       for(a = 0; a < countEx; a++){
         exX[a]+=exAddX[a];
         exY[a]+=exAddY[a]+exGravity[a];
-        exA[a]-= .001;
-        if(exR[a]-.001 > 0){
-          exR[a]-=.001;
+        exA[a]-= .0001;
+        if(exR[a]-.0001 > 0){
+          exR[a]-=.0001;
         }
         exGravity[a]+=.01;
       }
@@ -64,14 +64,14 @@ onload = function (){
         }
       }
     }
-    var interval = setInterval(explode,10);
+    var interval = setInterval(explode,5); //alterei aqui era 10
     canvas.addEventListener(downEvent, coordinates);
 function coordinates(event){
-    countEx+=1000;
+    countEx+=350; //alterei aqui 1000
     for(; a < countEx; a++){
         exX[a] = event.pageX;
         exY[a] = event.pageY;
-        exR[a] = (getRandom()+3)/3*2;
+        exR[a] = (getRandom()+3)/3*2; //alterei aqui 3
         exA[a] = 1;
         exColor1[a] = `${getColor()}`;
         exAngle[a] = getRandom();
@@ -86,12 +86,13 @@ function coordinates(event){
       return(r);
     }
     function getColor(){
-      var red = Math.floor(Math.random()*56+200);
-      var green = Math.floor(Math.random()*254);
+      var red = Math.floor(Math.random()*80);//56+200
+      var green = Math.floor(Math.random()*25); //254
+      var blue = Math.floor(Math.random()*265);
       
       //var color = colors[r];
       //return(color);
-      return(`rgba(${red},${green},${0},`);
+      return(`rgba(${red},${green},${blue},`);//0
     }
     
     function clear(){
